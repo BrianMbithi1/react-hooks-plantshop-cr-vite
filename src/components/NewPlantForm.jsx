@@ -11,7 +11,7 @@ function NewPlantForm({ onAddPlant }) {
     const newPlant = {
       name: name,
       image: image,
-      price: Number(price),
+      price: price,
     };
 
     onAddPlant(newPlant);
@@ -52,7 +52,6 @@ function NewPlantForm({ onAddPlant }) {
           value={price}
           onChange={(e) => setPrice(e.target.value)}
           required
-          min="0"
         />
 
         <button type="submit">

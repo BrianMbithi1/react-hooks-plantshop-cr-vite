@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import NewPlantForm from "./NewPlantForm";
 import PlantList from "./PlantList";
 import Search from "./Search";
@@ -8,16 +7,10 @@ function PlantPage() {
   const [plants, setPlants] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
-  
+  // Fetch plants when the page loads
   useEffect(() => {
-    fetch("http://localhost:3000/plants")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to fetch plants");
-        }
-
-        return response.json();
-      })
+    fetch("http://localhost:6001/plants")
+      .then((response) => response.json())
       .then((data) => {
         setPlants(data);
       })
@@ -26,9 +19,9 @@ function PlantPage() {
       });
   }, []);
 
-  // Add a new plant to the backend
+  // Add a new plant
   function handleAddPlant(newPlant) {
-    fetch("http://localhost:3000/plants", {
+    fetch("http://localhost:6001/plants", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -39,7 +32,6 @@ function PlantPage() {
         if (!response.ok) {
           throw new Error("Failed to add plant");
         }
-
         return response.json();
       })
       .then((data) => {
@@ -53,7 +45,7 @@ function PlantPage() {
       });
   }
 
-  // Filter plants using their names
+  // Filter plants by name
   const filteredPlants = plants.filter((plant) =>
     plant.name
       .toLowerCase()

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
 function PlantCard({ plant }) {
-  const [isSoldOut, setIsSoldOut] = useState(false);
+  const [inStock, setInStock] = useState(true);
 
-  function handleSoldOut() {
-    setIsSoldOut((previousState) => !previousState);
+  function handleStockClick() {
+    setInStock((previousStock) => !previousStock);
   }
 
   return (
@@ -16,14 +16,20 @@ function PlantCard({ plant }) {
 
       <h4>{plant.name}</h4>
 
-      <p>Price: ${plant.price}</p>
+      <p>Price: {plant.price}</p>
 
-      <button
-        className="primary"
-        onClick={handleSoldOut}
-      >
-        {isSoldOut ? "Out of Stock" : "In Stock"}
-      </button>
+      {inStock ? (
+        <button
+          className="primary"
+          onClick={handleStockClick}
+        >
+          In Stock
+        </button>
+      ) : (
+        <button onClick={handleStockClick}>
+          Out of Stock
+        </button>
+      )}
     </li>
   );
 }
